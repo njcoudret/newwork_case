@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: int_cases_per_product
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null

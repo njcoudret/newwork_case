@@ -1,0 +1,230 @@
+version: 2
+
+models:
+  - name: stg_salesforce__account
+    columns:
+      - name: account_id
+        tests:
+          - unique
+          - not_null
+      - name: user_id_owner
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__contact
+    columns:
+      - name: contact_id
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__account')
+              field: account_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__case
+    columns:
+      - name: case_id
+        tests:
+          - unique
+          - not_null
+      - name: contact_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__contact')
+              field: contact_id
+      - name: account_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__account')
+              field: account_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__case_history_2
+    columns:
+      - name: case_history_id
+        tests:
+          - unique
+          - not_null
+      - name: case_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__case')
+              field: case_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__solution
+    columns:
+      - name: solution_id
+        tests:
+          - unique
+          - not_null
+      - name: case_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_salesforce__case')
+              field: case_id
+  - name: stg_salesforce__campaign
+    columns:
+      - name: campaign_id
+        tests:
+          - unique
+          - not_null
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__opportunity
+    columns:
+      - name: opportunity_id
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__account')
+              field: account_id
+      - name: campaign_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__campaign')
+              field: campaign_id
+      - name: contact_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__contact')
+              field: contact_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__opportunity_history
+    columns:
+      - name: opportunity_history_id
+        tests:
+          - unique
+          - not_null
+      - name: opportunity_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__opportunity')
+              field: opportunity_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__pricebook_entry
+    columns:
+      - name: pricebook_entry_id
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__product_2')
+              field: product_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__lead
+    columns:
+      - name: lead_id
+        tests:
+          - unique
+          - not_null
+      - name: account_id_converted
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__account')
+              field: account_id
+      - name: contact_id_converted
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__contact')
+              field: contact_id
+      - name: opportunity_id_converted
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__opportunity')
+              field: opportunity_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+  - name: stg_salesforce__product_2
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('stg_salesforce__user')
+              field: user_id
