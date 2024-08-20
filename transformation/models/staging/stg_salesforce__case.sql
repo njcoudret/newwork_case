@@ -31,6 +31,12 @@ renamed as (
         origin,
         subject,
         priority,
+        case
+            when lower(priority) = 'high' then 1
+            when lower(priority) = 'medium' then 2
+            when lower(priority) = 'low' then 3
+            else 4
+        end as priority_order,
         description,
         {{bool('isclosed')}} as is_closed,
         {{to_local_tz('closeddate')}} as datetime_closed,

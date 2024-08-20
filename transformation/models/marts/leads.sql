@@ -1,37 +1,37 @@
 with leads as (
-
     select * from {{ ref('stg_salesforce__lead') }}
     where not is_deleted
-
 ),
 
-selected_columns as (
+leads_converted as (
+    select * from {{ ref('int_leads_with_conversion')}}
+),
+
+users as (
+    select * from {{ ref('stg_salesforce__user') }}
+),
+
+leads_with_conversion_and_owner as (
     select
-        company,
-        state,
-        country,
-        source,
-        status,
-        status_type,
-        industry,
-        rating,
-        current_generators,
-        product_series,
-        COUNT(distinct lead_id) as nr_leads,
-        SUM(nr_locations) as nr_locations,
-        SUM(revenue_annual) as amt_revenue_annual
-    from leads
-    group by
-        company,
-        state,
-        country,
-        source,
-        status,
-        status_type,
-        industry,
-        rating,
-        current_generators,
-        product_series
+        l.lead_id,
+        l.company,
+        l.state,
+        l.country,
+        l.source,
+        l.status,
+        l.status_type,
+        l.is_unread_by_owner,
+        u_owner.full_name as full_name_owner,
+        lc.is_converted,
+        l.current_generators,
+        l.product_series,
+        1 as nr_leads,
+        l.nr_locations
+    from leads as l
+    left join leads_converted as lc
+        on l.lead_id = lc.lead_id
+    left join users as u_owner
+        on l.user_id_owner = u_owner.user_id
 )
 
-select * from selected_columns
+select * from leads_with_conversion_and_owner

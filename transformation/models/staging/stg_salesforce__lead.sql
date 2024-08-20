@@ -51,7 +51,7 @@ renamed as (
         numberofemployees as nr_employees,
         {{set_null('ownerid')}} as user_id_owner,
         {{bool('hasoptedoutofemail')}} as is_opt_out_email,
-        {{bool('isconverted')}} as is_converted,
+        {{bool('isconverted')}} as is_converted_wrong, -- Raw data does not show if lead converted or not
         {{c_date('converteddate')}} as date_converted,
         {{set_null('convertedaccountid')}} as account_id_converted,
         {{set_null('convertedcontactid')}} as contact_id_converted,
@@ -68,7 +68,7 @@ renamed as (
         {{to_local_tz('lasttransferdate')}} as datetime_last_transfer,
         jigsaw,
         jigsawcontactid,
-        cleanstatus,
+        cleanstatus as status_wrong, -- Raw data does not reflect real status of lead
         companydunsnumber,
         dandbcompanyid,
         emailbouncedreason,
