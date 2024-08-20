@@ -1,7 +1,5 @@
 with accounts as (
-
     select * from {{ ref('stg_salesforce__account') }}
-
 ),
 
 country_aliases as (

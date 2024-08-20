@@ -14,8 +14,8 @@ renamed as (
         lastname as last_name,
         CONCAT_WS(
             ', ',
-            IFNULL(last_name,''),
-            IFNULL(first_name,'')
+            IFNULL(lastname,''),
+            IFNULL(firstname,'')
         ) as full_name,
         companyname as company_name,
         division,

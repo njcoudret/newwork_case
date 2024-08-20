@@ -15,6 +15,11 @@ renamed as (
         salutation,
         firstname as first_name,
         lastname as last_name,
+        CONCAT_WS(
+            ', ',
+            IFNULL(lastname,''),
+            IFNULL(firstname,'')
+        ) as full_name,
         title,
         company,
         street,

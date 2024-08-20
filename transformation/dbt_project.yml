@@ -35,3 +35,6 @@ models:
 
 vars:
   "dbt_date:time_zone": "Europe/Berlin"
+  "query_opportunity_stage": "select distinct stage_name_underscored from staging.stg_salesforce__opportunity order by stage_sort_order asc"
+  "query_case_priority": "select distinct lower(priority) from staging.stg_salesforce__case order by priority_order asc"
+  "query_case_type": "select distinct lower(type) from staging.stg_salesforce__case"

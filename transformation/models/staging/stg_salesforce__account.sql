@@ -71,7 +71,7 @@ renamed as (
         customerpriority__c as customer_priority,
         sla__c as sla_category,
         {{bool('active__c')}} as is_active,
-        numberoflocations__c as number_of_locations,
+        numberoflocations__c as nr_locations,
         upsellopportunity__c as upsell_opportunity,
         slaserialnumber__c as sla_serial_number,
         {{c_date('slaexpirationdate__c')}} AS date_sla_expiration

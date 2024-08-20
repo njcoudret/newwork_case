@@ -16,6 +16,7 @@ renamed as (
         name,
         description,
         stagename as stage_name,
+        regexp_replace(lower(stagename),'[./\s]+','_','g') as stage_name_underscored,
         stagesortorder as stage_sort_order,
         amount,
         probability,
@@ -34,7 +35,7 @@ renamed as (
             ELSE NULL
         END existing_customer_category,
         nextstep,
-        leadsource,
+        leadsource as source,
         {{bool('isclosed')}} as is_closed,
         {{bool('iswon')}} as is_won,
         forecastcategory as forecast_category,

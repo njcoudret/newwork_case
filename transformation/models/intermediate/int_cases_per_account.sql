@@ -1,4 +1,4 @@
-{%- set query_result = run_query('select distinct lower(priority) from staging.stg_salesforce__case order by priority_order asc') %}
+{%- set query_result = run_query(var('query_case_priority')) %}
 
 {%- if execute -%}
 {%- set case_priority = query_result.columns[0].values() -%}

@@ -1,15 +1,58 @@
 version: 2
 
 models:
-  - name: int_cases_per_product
-    columns:
-      - name: product_id
-        tests:
-          - unique
-          - not_null
   - name: int_accounts_with_countries
     columns:
       - name: account_id
         tests:
           - unique
           - not_null
+  - name: int_case_status_durations
+    columns:
+      - name: case_id
+        tests:
+          - unique
+          - not_null
+  - name: int_cases_joinable
+    columns:
+      - name: case_id
+        tests:
+          - unique
+          - not_null
+  - name: int_cases_per_account
+    columns:
+      - name: account_id
+        tests:
+          - unique
+          - not_null
+  - name: int_cases_per_product
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+  - name: int_contacts_with_countries
+    columns:
+      - name: contact_id
+        tests:
+          - unique
+          - not_null
+  - name: int_leads_with_conversion
+    columns:
+      - name: lead_id
+        tests:
+          - unique
+          - not_null
+  - name: int_opportunities_aggregated_per_account
+    columns:
+      - name: account_id
+        tests:
+          - unique
+          - not_null
+  - name: int_primary_contact_account
+    columns:
+      - name: account_id
+        tests:
+          - unique
+          - not_null
+

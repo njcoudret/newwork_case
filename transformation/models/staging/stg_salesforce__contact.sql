@@ -12,8 +12,13 @@ renamed as (
         {{set_null('masterrecordid')}} as master_record_id,
         {{set_null('accountid')}} as account_id,
         salutation,
-        firstname,
-        lastname,
+        firstname as first_name,
+        lastname as last_name,
+        CONCAT_WS(
+            ', ',
+            IFNULL(lastname,''),
+            IFNULL(firstname,'')
+        ) as full_name,
         otherstreet as street_other,
         othercity as city_other,
         otherstate as state_other,
@@ -41,8 +46,8 @@ renamed as (
         title,
         department,
         assistantname,
-        leadsource,
-        birthdate,
+        leadsource as lead_source,
+        {{c_date('birthdate')}} as date_birth,
         description,
         {{set_null('ownerid')}} as user_id_owner,
         {{bool('hasoptedoutofemail')}} as is_opt_out_email,
@@ -64,8 +69,8 @@ renamed as (
         individualid,
         pronouns,
         genderidentity,
-        level__c,
-        languages__c
+        level__c as contact_level,
+        languages__c as languages
 
     from source
 
