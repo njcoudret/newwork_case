@@ -22,7 +22,7 @@ combined_data as (
         l.is_converted,
         l.current_generators,
         l.product_series,
-        1 as nr_leads,
+        l.nr_leads,
         l.nr_locations
     from leads as l
     left join user as u_owner
