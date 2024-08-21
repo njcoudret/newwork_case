@@ -2,10 +2,6 @@ with relevant_cases as (
     select * from {{ ref('int_cases_joinable')}}
 ),
 
-users as (
-    select * from {{ ref('stg_salesforce__user')}}
-),
-
 /* Cannot use status durations because of incorrect create dates */
 -- status_durations as (
 --     select * from {{ ref('int_case_status_durations')}}
@@ -29,11 +25,11 @@ selected_columns as (
         c.priority_order,
         c.is_potential_liability,
         c.datetime_closed,
-        u_owner.full_name as full_name_owner,
+        c.user_id_owner,
+        c.user_id_create,
+        c.user_id_last_modified,
         1 as nr_cases
     from relevant_cases as c
-    left join users as u_owner
-        on c.user_id_owner = u_owner.user_id
 )
 
 select * from selected_columns

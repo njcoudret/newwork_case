@@ -4,11 +4,7 @@ with leads as (
 ),
 
 leads_converted as (
-    select * from {{ ref('int_leads_with_conversion')}}
-),
-
-users as (
-    select * from {{ ref('stg_salesforce__user') }}
+    select * from {{ ref('int_leads_with_conversion') }}
 ),
 
 leads_with_conversion_and_owner as (
@@ -21,7 +17,9 @@ leads_with_conversion_and_owner as (
         l.status,
         l.status_type,
         l.is_unread_by_owner,
-        u_owner.full_name as full_name_owner,
+        l.user_id_owner,
+        l.user_id_create,
+        l.user_id_last_modified,
         lc.is_converted,
         l.current_generators,
         l.product_series,
@@ -30,8 +28,6 @@ leads_with_conversion_and_owner as (
     from leads as l
     left join leads_converted as lc
         on l.lead_id = lc.lead_id
-    left join users as u_owner
-        on l.user_id_owner = u_owner.user_id
 )
 
 select * from leads_with_conversion_and_owner

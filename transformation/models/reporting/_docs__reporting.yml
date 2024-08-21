@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: accounts_wide
+    columns:
+      - name: account_id
+        tests:
+          - unique
+          - not_null
+  - name: products_wide
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+  - name: leads_wide
+    columns:
+      - name: lead_id
+        tests:
+          - unique
+          - not_null

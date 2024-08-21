@@ -1,0 +1,142 @@
+version: 2
+
+models:
+  - name: account
+    columns:
+      - name: account_id
+        tests:
+          - unique
+          - not_null
+      - name: user_id_owner
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: contact_id_primary
+        tests:
+          - relationships:
+              to: ref('contact')
+              field: contact_id
+  - name: contact
+    columns:
+      - name: contact_id
+        tests:
+          - unique
+          - not_null
+  - name: date
+    columns:
+      - name: date
+        tests:
+          - unique
+          - not_null
+  - name: product
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
+  - name: user
+    columns:
+      - name: user_id
+        tests:
+          - unique
+          - not_null
+  - name: cases
+    columns:
+      - name: case_id
+        tests:
+          - unique
+          - not_null
+      - name: contact_id
+        tests:
+          - relationships:
+              to: ref('contact')
+              field: contact_id
+      - name: account_id
+        tests:
+          - relationships:
+              to: ref('account')
+              field: account_id
+      - name: product_id
+        tests:
+          - relationships:
+              to: ref('product')
+              field: product_id
+      - name: user_id_owner
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+  - name: leads
+    columns:
+      - name: lead_id
+        tests:
+          - unique
+          - not_null
+      - name: user_id_owner
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: product_series
+        tests:
+          - relationships:
+              to: ref('product')
+              field: product_series
+  - name: opportunities
+    columns:
+      - name: opportunity_id
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        tests:
+          - relationships:
+              to: ref('account')
+              field: account_id
+      - name: user_id_owner
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: user_id_create
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+      - name: user_id_last_modified
+        tests:
+          - relationships:
+              to: ref('user')
+              field: user_id
+

@@ -22,7 +22,11 @@ renamed as (
         probability,
         expectedrevenue as revenue_expected,
         totalopportunityquantity as quantity,
-        {{c_date('closedate')}} as date_close,
+        if(
+            not is_closed,
+            null,
+            {{c_date('closedate')}}
+        ) as date_close,
         CASE 
             WHEN type LIKE 'New Customer%' THEN 'New'
             WHEN type LIKE 'Existing Customer%' THEN 'Existing'
