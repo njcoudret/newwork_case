@@ -23,7 +23,7 @@ renamed as (
         expectedrevenue as revenue_expected,
         totalopportunityquantity as quantity,
         if(
-            not is_closed,
+            not {{bool('isclosed')}},
             null,
             {{c_date('closedate')}}
         ) as date_close,
